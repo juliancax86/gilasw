@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
+import NavBar from './components/NavBar';
 import NotificationForm from './components/NotificationForm';
 import LogHistory from './components/LogHistory';
+import './App.css'; // Asegúrate de importar tus estilos aquí
 
 function App() {
-  const [logs, setLogs] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3001/notifications')
-      .then(response => response.json())
-      .then(data => setLogs(data));
-  }, []);
-
-  const handleFormSubmit = (data) => {
-    fetch('http://localhost:3001/notifications', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-      setLogs([data, ...logs]);
-    });
-  };
-
   return (
-    <div>
-      <NotificationForm onSubmit={handleFormSubmit} />
-      <LogHistory logs={logs} />
-    </div>
+    <Router>
+      <NavBar />  {/* NavBar siempre se renderizará */}
+      <div className="content">  {/* Un div para el contenido principal */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/notify" element={<NotificationForm />} />
+          <Route path="/logs" element={<LogHistory />} />
+        </Routes>
+      </div>
+    </Router>
   );
+}
+
+function Home() {
+  return <h1>Welcome to the Notification System</h1>;
 }
 
 export default App;

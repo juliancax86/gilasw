@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.content {
+  padding-top: 60px; /* Ajustar según la altura de tu NavBar */
+  width: 100%; /* Ancho completo */
+}
