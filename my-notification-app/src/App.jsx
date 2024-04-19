@@ -7,7 +7,7 @@ import {
 import NavBar from './components/NavBar';
 import NotificationForm from './components/NotificationForm';
 import LogHistory from './components/LogHistory';
-import './App.css'; // Asegúrate de importar tus estilos aquí
+import './App.css';
 
 function App() {
   return (
